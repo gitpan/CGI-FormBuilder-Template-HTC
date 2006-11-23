@@ -8,6 +8,7 @@ WriteMakefile
           'EXE_FILES' => [],
           'VERSION_FROM' => 'lib/CGI/FormBuilder/Template/HTC.pm',
           'PREREQ_PM' => {
+                           'HTML::Template::Compiled' => '0.82',
                            'CGI::FormBuilder' => 0
                          }
         )

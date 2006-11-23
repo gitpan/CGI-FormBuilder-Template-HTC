@@ -1,5 +1,5 @@
 package CGI::FormBuilder::Template::HTC;
-$VERSION = '0.01';
+$VERSION = '0.02';
 use strict;
 use warnings;
 use Data::Dumper;
@@ -125,7 +125,7 @@ The template might look something like this (this is HTC syntax):
             <br/>
             [%/if %]
 
-        [% field %]
+        [%= field %]
       </td>
     </tr>
         [%/loop %]
@@ -150,7 +150,9 @@ By default, all the form and field information are accessible through simple var
     [%= fields %]  -  List of fields
     [%= field  %]  -  Hash of fields (for lookup by name)
 
-You can specify the variable option to have all these variables accessible under a certain namespace. For example:
+You can specify the variable option to have all these variables
+accessible under a certain namespace. For example:
+
     my $form = CGI::FormBuilder->new(
         fields => \@fields,
         template => {
@@ -198,6 +200,42 @@ To iterate through all the fields in order, you could do something like this:
     </tr>
     [%/loop %]
 
+If you want to customise any of the HTC options, you can
+add options to the C<template> option. You can also set the data
+item to define any additional
+variables you want accesible when the template is processed.
+
+    my $form = CGI::FormBuilder->new(
+        fields   => \@fields,
+        template => {
+            type     => 'HTC',
+            filename => 'form.tmpl',
+            variable => 'form',
+            # other HTC options
+            cache_dir => '/path/to/cachedir',
+        },
+        data => {
+              version => 1.23,
+              author  => 'Fred Smith',
+        },
+    );
+
+For further details on using the Template Toolkit, see 
+
+=head1 SEE ALSO
+
+=over 4
+
+=item L<CGI::FormBuilder>
+
+=item L<CGI::FormBuilder::Template::TT2>
+
+=item L<CGI::FormBuilder::Template::HTML>
+
+=item L<HTML::Template::Compiled>
+
+=back
+
 =head1 AUTHOR
 
 Tina Mueller
@@ -207,9 +245,11 @@ Tina Mueller
 Nate Wiger, who is the author of L<CGI::FormBuilder>. I copied more or less
 the whole documentation and some of the tests.
 
+pfuschi from perl-community.de for the idae
+
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2005 by Tina Mueller
+Copyright (C) 2006 by Tina Mueller
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.3 or,

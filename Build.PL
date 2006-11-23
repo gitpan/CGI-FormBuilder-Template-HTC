@@ -7,10 +7,10 @@ my $build = Module::Build->new(
     license            => 'perl',
     module_name        => 'CGI::FormBuilder::Template::HTC',
     requires => {
-        'CGI::FormBuilder' => 0,
-    },
-    recommends => {
+        'CGI::FormBuilder'         => 0,
         'HTML::Template::Compiled' => '0.82',
+        },
+    recommends => {
     },
     create_readme      => 0,
     sign               => 0,
